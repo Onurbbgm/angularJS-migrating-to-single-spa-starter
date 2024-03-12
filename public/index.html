@@ -18,7 +18,8 @@
         "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js",
         "react":"https://unpkg.com/react@18/umd/react.production.min.js",
         "react-dom":"https://unpkg.com/react-dom@18/umd/react-dom.production.min.js",
-        "@Bruno/react-migration": "//localhost:9000/Bruno-react-migration.js"
+        "@Bruno/react-migration": "//localhost:9000/rootComponente.js",
+        "@Bruno/someOtherComponente": "//localhost:9000/someOtherComponente.js"
       }
 
     }
@@ -109,6 +110,7 @@
 
       <aside class="msg-play show-for-large-up" ng-class="{'faded': fade_msg_play}" ng-hide="loading"></aside>
     </div>
+    <other-component></other-component>
     <script src="/assets/js/angular_drums.min.js"></script>
     <!-- <script type="systemjs-module" src="/assets/js/angular_drums.min.js"></script> -->
     <!-- <script>System.import('/assets/js/angular_drums.min.js')</script> -->

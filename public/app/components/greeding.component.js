@@ -23,7 +23,7 @@ angular.
 
 System.import('single-spa').then((singleSpa) => {
     System.import('@Bruno/react-migration').then((parcelConfig) => {
-        // console.log(mountRootParcel);
+        console.log(parcelConfig);
         singleSpa.mountRootParcel(parcelConfig, {
             domElement: document.getElementById('react-component-container'),
             customProps: {
