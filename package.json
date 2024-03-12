@@ -15,7 +15,7 @@
     "grunt": "latest",
     "grunt-contrib-connect": "latest",
     "grunt-contrib-sass": "latest",
-    "grunt-contrib-uglify": "latest",
+    "grunt-contrib-uglify-es": "github:gruntjs/grunt-contrib-uglify#harmony",
     "grunt-contrib-watch": "latest",
     "grunt-karma": "latest",
     "jasmine-core": "latest",
@@ -37,5 +37,10 @@
     "url": "https://github.com/dougjohnston/angular-drum-machine/issues"
   },
   "homepage": "https://github.com/dougjohnston/angular-drum-machine",
-  "dependencies": {}
+  "dependencies": {
+    "@types/howler": "^2.2.11",
+    "howler": "^2.2.4",
+    "single-spa": "^6.0.1",
+    "single-spa-angularjs": "^4.3.1"
+  }
 }

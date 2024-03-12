@@ -1,5 +1,7 @@
 'use strict';
 
+
+
 // Drum Controller
 app.controller('DrumMachineCtrl', function($scope) {
   //variable to prevent multiple playloops
@@ -45,3 +47,5 @@ app.controller('DrumMachineCtrl', function($scope) {
       bpmEdit.style.display = 'none';
   }
 });
+
+
