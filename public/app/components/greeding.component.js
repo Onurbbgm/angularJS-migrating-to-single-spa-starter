@@ -12,8 +12,25 @@
 
 //     };
 // });
-System.import('single-spa').then((mountRootParcel, ParcelConfig, Parcel) => {
-    
+angular.
+  module('AngularDrumMachine').
+  component('greetUser', {
+    template: '<div id="react-component-container"></div>',
+    // controller: function GreetUserController() {
+    //   this.user = 'world';
+    // }
+  });
+
+System.import('single-spa').then((singleSpa) => {
+    System.import('@Bruno/react-migration').then((parcelConfig) => {
+        // console.log(mountRootParcel);
+        singleSpa.mountRootParcel(parcelConfig, {
+            domElement: document.getElementById('react-component-container'),
+            customProps: {
+                name: 'and I am prop called'
+            }
+        })
+    })
 });
 // System.import<ParcelConfig>('@Bruno/react-single-spa-tutorial')
 //       .then((parcelConfig) => {
@@ -26,11 +43,4 @@ System.import('single-spa').then((mountRootParcel, ParcelConfig, Parcel) => {
 //           }
 //         });
 //       });
-// angular.
-//   module('AngularDrumMachine', ["single-spa-angularjs"]).
-//   component('greetUser', {
-//     template: 'Hello, {{$ctrl.user}}!',
-//     controller: function GreetUserController() {
-//       this.user = 'world';
-//     }
-//   });
+
