@@ -3,10 +3,11 @@
 
 
 // Drum Controller
-app.controller('DrumMachineCtrl', function($scope) {
+app.controller('DrumMachineCtrl', function($scope, $rootScope) {
   //variable to prevent multiple playloops
     $scope.lock = false;
-
+    $rootScope.helloText = "Will you say hello to me?";
+    $scope.didItSayHello = false;
     // Start playback
   $scope.playLoop = function () {
       if (!$scope.lock) {
@@ -46,6 +47,22 @@ app.controller('DrumMachineCtrl', function($scope) {
       bpm.style.display = 'inline-block';
       bpmEdit.style.display = 'none';
   }
+
+  $scope.sayHello = function() {
+    
+    $scope.didItSayHello = !$scope.didItSayHello;
+    if($scope.didItSayHello) {
+      $rootScope.helloText = 'Hello Clarice';
+    } else {
+      $rootScope.helloText = 'Quid pro quo';
+    }
+    console.log($rootScope.helloText);
+  };
+
+  $rootScope.$watch('helloText', function(newValue){
+    window.dispatchEvent(new CustomEvent('helloTextChanged', { detail: newValue }))
+  });
+
 });
 
 
