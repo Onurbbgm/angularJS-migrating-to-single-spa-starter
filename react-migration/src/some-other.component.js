@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 
 export default function SomeOther({rootVariables}) {
     console.log(rootVariables);
-
-    const [helloVariable, setHelloVariable] = useState(rootVariables.helloText);
+    const helloText = rootVariables?.helloText || 'TEST';
+    const [helloVariable, setHelloVariable] = useState(helloText);
 
     //TODO: Improve this
     //This need to be done in a general way so all rootScope variable are properly updated

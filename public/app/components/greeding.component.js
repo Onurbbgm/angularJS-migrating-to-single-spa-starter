@@ -21,17 +21,22 @@ angular.
     // }
   });
 
-System.import('single-spa').then((singleSpa) => {
-    System.import('@Bruno/react-migration').then((parcelConfig) => {
-        console.log(parcelConfig);
-        singleSpa.mountRootParcel(parcelConfig, {
-            domElement: document.getElementById('react-component-container'),
-            customProps: {
-                name: 'and I am prop called'
-            }
-        })
-    })
-});
+// System.import('reactMigration').then((something) => {
+//     console.log(something);
+    
+// });
+
+// System.import('single-spa').then((singleSpa) => {
+//     System.import('@Bruno/react-migration').then((parcelConfig) => {
+//         console.log(parcelConfig);
+//         singleSpa.mountRootParcel(parcelConfig, {
+//             domElement: document.getElementById('react-component-container'),
+//             customProps: {
+//                 name: 'and I am prop called'
+//             }
+//         })
+//     })
+// });
 // System.import<ParcelConfig>('@Bruno/react-single-spa-tutorial')
 //       .then((parcelConfig) => {
 //         this.parcel = parcelConfig;

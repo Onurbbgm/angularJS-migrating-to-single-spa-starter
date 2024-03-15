@@ -1,5 +1,6 @@
 const { merge } = require("webpack-merge");
 const singleSpaDefaults = require("webpack-config-single-spa-react");
+const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 
 module.exports = (webpackConfigEnv, argv) => {
   const defaultConfig = singleSpaDefaults({
@@ -8,17 +9,30 @@ module.exports = (webpackConfigEnv, argv) => {
     webpackConfigEnv,
     argv,
   });
-  console.log(defaultConfig);
+  // console.log(defaultConfig);
   return merge(defaultConfig, {
     // modify the webpack config however you'd like to by adding to this object
-    entry: {
-      rootComponente: '/Users/brunomoretto/Local Documents/single-spa-tutorials/angularjs-starter/angularJS-migrating-to-single-spa-starter/react-migration/src/Bruno-react-migration',
-      someOtherComponente: '/Users/brunomoretto/Local Documents/single-spa-tutorials/angularjs-starter/angularJS-migrating-to-single-spa-starter/react-migration/src/some-other-componente-migration'
-    },
+    // entry: {
+    //   rootComponente: '/Users/brunomoretto/Local Documents/single-spa-tutorials/angularjs-starter/angularJS-migrating-to-single-spa-starter/react-migration/src/Bruno-react-migration',
+    //   someOtherComponente: '/Users/brunomoretto/Local Documents/single-spa-tutorials/angularjs-starter/angularJS-migrating-to-single-spa-starter/react-migration/src/some-other-componente-migration'
+    // },
+    // output: {
+    //   filename: '[name].js'
+    // }
     output: {
-      filename: '[name].js'
-      // libraryTarget: 'umd',
-      // library: 'ReactMigration'
-    }
+      publicPath: 'http://localhost:9000/'
+    },
+    plugins: [
+      new ModuleFederationPlugin({
+        name: 'reactMigration',
+        filename: 'remoteEntry.js',
+        library: { type: 'system' },
+        exposes: {
+          'RootComponent': './src/Bruno-react-migration',
+          'SomeOtherComponent': './src/some-other-componente-migration'
+        },
+        shared: ['react', 'react-dom', 'single-spa-react']
+      })
+    ]
   });
 };

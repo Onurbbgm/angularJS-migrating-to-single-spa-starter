@@ -18,18 +18,20 @@
         "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js",
         "react":"https://unpkg.com/react@18/umd/react.production.min.js",
         "react-dom":"https://unpkg.com/react-dom@18/umd/react-dom.production.min.js",
-        "@Bruno/react-migration": "//localhost:9000/rootComponente.js",
-        "@Bruno/someOtherComponente": "//localhost:9000/someOtherComponente.js"
+        "reactMigration": "http://localhost:9000/remoteEntry.js"
       }
 
     }
   </script>
+ 
   <link rel="preload" href="https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js" as="script">
   <!-- <script type="module" src="./app/components/greeding.component.js"></script> -->
   <!-- <script>System.import('./register-single-spa.js')</script> -->
+  <!-- <script type="module" src="http://localhost:9000/remoteEntry.js"></script> -->
   <script>System.import('single-spa')</script>
   <!-- <script>System.import('@Bruno/react-migration')</script> -->
-  <!-- <script>System.import('./root-config.js')</script> -->
+  <script>System.import('reactMigration')</script>
+  <script>System.import('./root-config.js')</script>
   
   <script>
     (function (i, s, o, g, r, a, m) {
@@ -86,6 +88,7 @@
           </ul>
         </li>
         <greet-user></greet-user>
+        <div id="single-spa-application:rootComponent"></div>
         <li class="dm-row" ng-repeat="row in machine.rows()">
           <ul class="instrument">
             <li class='instrument-name'>
@@ -107,9 +110,9 @@
         <a href="http://www.musicradar.com/news/tech/free-music-samples-download-loops-hits-and-multis-217833/65">Music
           Radar</a>.
       </footer>
-
       <aside class="msg-play show-for-large-up" ng-class="{'faded': fade_msg_play}" ng-hide="loading"></aside>
-      <other-component></other-component>
+      <div id="single-spa-application:someOtherComponent" ></div>
+      <!-- <other-component></other-component> -->
       <button ng-click="sayHello()">Say hello</button>
     </div>
     <script src="/assets/js/angular_drums.min.js"></script>
