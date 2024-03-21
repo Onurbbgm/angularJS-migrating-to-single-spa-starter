@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en-us" ng-app="AngularDrumMachine">
 
 <head>
@@ -30,7 +30,7 @@
   <!-- <script type="module" src="http://localhost:9000/remoteEntry.js"></script> -->
   <script>System.import('single-spa')</script>
   <!-- <script>System.import('@Bruno/react-migration')</script> -->
-  <script>System.import('reactMigration')</script>
+  <!-- <script>System.import('reactMigration')</script> -->
   <script>System.import('./root-config.js')</script>
   
   <script>
@@ -87,8 +87,10 @@
             </li>
           </ul>
         </li>
-        <greet-user></greet-user>
+        <!-- <greet-user></greet-user> -->
+        <div id="reactRootComponent"></div>
         <div id="single-spa-application:rootComponent"></div>
+        <!-- <div id="single-spa-application:rootComponent"></div> -->
         <li class="dm-row" ng-repeat="row in machine.rows()">
           <ul class="instrument">
             <li class='instrument-name'>

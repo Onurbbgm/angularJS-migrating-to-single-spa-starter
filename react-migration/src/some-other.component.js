@@ -13,9 +13,11 @@ export default function SomeOther({rootVariables}) {
             setHelloVariable(event.detail);
         };
 
+        console.log('mounted');
         window.addEventListener('helloTextChanged', helloVariableChanged);
 
         return () => {
+            console.log('unmonted');
             window.removeEventListener('helloTextChanged', helloVariableChanged);
         }
     }, []);
