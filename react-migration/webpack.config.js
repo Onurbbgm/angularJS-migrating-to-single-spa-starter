@@ -9,6 +9,7 @@ module.exports = (webpackConfigEnv, argv) => {
     webpackConfigEnv,
     argv,
   });
+  defaultConfig.externals = [];
   // console.log(defaultConfig);
   return merge(defaultConfig, {
     // modify the webpack config however you'd like to by adding to this object
