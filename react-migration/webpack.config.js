@@ -21,7 +21,7 @@ module.exports = (webpackConfigEnv, argv) => {
     //   filename: '[name].js'
     // }
     output: {
-      publicPath: 'http://localhost:9000/'
+      publicPath: 'http://localhost:3000/'
     },
     plugins: [
       new ModuleFederationPlugin({
