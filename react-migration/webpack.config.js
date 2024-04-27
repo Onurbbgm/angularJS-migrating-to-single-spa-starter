@@ -10,6 +10,7 @@ module.exports = (webpackConfigEnv, argv) => {
     argv,
   });
   defaultConfig.externals = [];
+  const publicPath = process.env.NODE_ENV === 'production' ? 'http://localhost:3000/' : 'http://localhost:9000/';
   // console.log(defaultConfig);
   return merge(defaultConfig, {
     // modify the webpack config however you'd like to by adding to this object
@@ -21,7 +22,7 @@ module.exports = (webpackConfigEnv, argv) => {
     //   filename: '[name].js'
     // }
     output: {
-      publicPath: 'http://localhost:3000/'
+      publicPath: publicPath
     },
     plugins: [
       new ModuleFederationPlugin({

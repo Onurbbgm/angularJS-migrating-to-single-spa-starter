@@ -1,8 +1,10 @@
 {
   "name": "@Bruno/react-migration",
   "scripts": {
-    "start": "webpack serve --port 9000",
+    "start": "NODE_ENV=development webpack serve --port 9000",
     "start:standalone": "webpack serve --env standalone",
+    "build:dev": "NODE_ENV=development concurrently npm:build:webpack",
+    "build:prod": "NODE_ENV=production concurrently npm:build:webpack",
     "build": "concurrently npm:build:*",
     "build:webpack": "webpack --mode=production",
     "analyze": "webpack --mode=production --env analyze",

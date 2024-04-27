@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Build the application
-RUN npm run build
+RUN npm run build:prod
 
 # Use a lightweight version of Node.js as the final base image
 FROM node:20-alpine
