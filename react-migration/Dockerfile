@@ -13,8 +13,18 @@ RUN npm install
 # Copy the rest of the application code to the working directory
 COPY . .
 
+# Use an ARG to allow specifying the environment at build time
+ARG ENV
+
+# Use a RUN command with a shell script to conditionally run different commands based on the ARG value
+RUN if [ "$ENV" = "qa" ] ; then npm run build:qa; \
+    elif [ "$ENV" = "uat" ] ; then npm run build:uat; \
+    elif [ "$ENV" = "sandbox" ] ; then npm run build:sandbox; \
+    elif [ "$ENV" = "prod" ] ; then npm run build:prod; \
+    else echo "Please provide an environment as a build arg (e.g., --build-arg ENV=qa)"; exit 1; fi
+
 # Build the application
-RUN npm run build:prod
+#RUN npm run build:prod
 
 # Use a lightweight version of Node.js as the final base image
 FROM node:20-alpine
