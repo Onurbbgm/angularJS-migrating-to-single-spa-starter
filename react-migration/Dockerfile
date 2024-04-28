@@ -40,7 +40,7 @@ RUN npm install -g serve
 #RUN npm i -S serve
 
 # Expose port 5000 for the application
-EXPOSE 3000
+EXPOSE 9000
 
 # Start the application
-CMD ["serve", "dist"]
+CMD ["serve", "-p", "9000", "dist"]
