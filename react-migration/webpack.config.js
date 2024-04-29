@@ -1,6 +1,7 @@
 const { merge } = require("webpack-merge");
 const singleSpaDefaults = require("webpack-config-single-spa-react");
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
+const path = require('path');
 
 module.exports = (webpackConfigEnv, argv) => {
   const defaultConfig = singleSpaDefaults({
@@ -10,19 +11,14 @@ module.exports = (webpackConfigEnv, argv) => {
     argv,
   });
   defaultConfig.externals = [];
-  const publicPath = process.env.NODE_ENV === 'production' ? 'http://localhost:9000/' : 'http://localhost:3000/';
+  const publicPath = process.env.NODE_ENV === 'production' ? 'http://localhost:3000/' : 'http://localhost:9000/';
+  const distName = process.env.NODE_ENV === 'production' ? 'dist-prod' : 'dist-local';
   // console.log(defaultConfig);
   return merge(defaultConfig, {
     // modify the webpack config however you'd like to by adding to this object
-    // entry: {
-    //   rootComponente: '/Users/brunomoretto/Local Documents/single-spa-tutorials/angularjs-starter/angularJS-migrating-to-single-spa-starter/react-migration/src/Bruno-react-migration',
-    //   someOtherComponente: '/Users/brunomoretto/Local Documents/single-spa-tutorials/angularjs-starter/angularJS-migrating-to-single-spa-starter/react-migration/src/some-other-componente-migration'
-    // },
-    // output: {
-    //   filename: '[name].js'
-    // }
     output: {
-      publicPath: publicPath
+      publicPath: publicPath,
+      path: path.resolve(__dirname, distName),
     },
     plugins: [
       new ModuleFederationPlugin({
