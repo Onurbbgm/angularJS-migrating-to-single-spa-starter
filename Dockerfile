@@ -29,16 +29,18 @@ RUN npm run build:dev
 RUN npm install -g serve
 
 # Install npm-run-all
-RUN npm install -g npm-run-all
+RUN npm install -g concurrently
 
 # Add scripts to package.json to start both apps
-RUN echo '{ "scripts": { "startboth": "npm-run-all --parallel start:*", "start:angular": "cd .. && npm run grunt", "start:react": "serve -p 9000 dist-local" } }' > package.json
+#RUN echo '{ "scripts": { "startboth": "npm-run-all --parallel start:*", "start:angular": "cd .. && npm run grunt", "start:react": "serve -p 9000 dist-local" } }' > package.json
 
 # Expose ports for both apps
 EXPOSE 8080 9000
 
 # Start both apps
-CMD npm run startboth
+#CMD npm run startboth
+
+CMD concurrently "cd .. && npm run grunt "  "serve -p 9000 dist-local"
 
 #OLD VERSION
 # # Use an official Node runtime as the base image
