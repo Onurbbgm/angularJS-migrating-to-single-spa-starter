@@ -40,7 +40,12 @@ EXPOSE 8080 9000
 # Start both apps
 #CMD npm run startboth
 
-CMD concurrently "cd .. && npm run grunt "  "serve -p 9000 dist-local"
+CMD if [ "$MXM_REACT_ENV" = "LOCAL_DEV" ] ; then concurrently "cd .. && npm run grunt "  "serve -p 9000 dist-local"; \
+    elif [ "$MXM_REACT_ENV" = "qa" ] ; then concurrently "cd .. && npm run grunt "  "serve -p 9000 dist-qa"; \
+    elif [ "$MXM_REACT_ENV" = "uat" ] ; then -p concurrently "cd .. && npm run grunt "  "serve -p 9000 dist-uat" ; \
+    elif [ "$MXM_REACT_ENV" = "sandbox" ] ; then concurrently "cd .. && npm run grunt "  "serve -p 9000 dist-sandbox"; \
+    else concurrently "cd .. && npm run grunt "  "serve -p 9000 dist" ; fi
+
 
 #OLD VERSION
 # # Use an official Node runtime as the base image
