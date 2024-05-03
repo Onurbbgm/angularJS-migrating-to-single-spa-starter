@@ -17,8 +17,8 @@ module.exports = (webpackConfigEnv, argv) => {
   return merge(defaultConfig, {
     // modify the webpack config however you'd like to by adding to this object
     output: {
-      publicPath: publicPath,
-      path: path.resolve(__dirname, distName),
+      publicPath: 'ENVIRONMENT_PUBLIC_URL', //This will be replace in the server.js
+      // path: path.resolve(__dirname, distName),
     },
     plugins: [
       new ModuleFederationPlugin({
