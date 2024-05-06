@@ -11,14 +11,11 @@ module.exports = (webpackConfigEnv, argv) => {
     argv,
   });
   defaultConfig.externals = [];
-  const publicPath = process.env.NODE_ENV === 'production' ? 'http://localhost:3000/' : 'http://localhost:9000/';
-  const distName = process.env.NODE_ENV === 'production' ? 'dist-prod' : 'dist-local';
-  // console.log(defaultConfig);
+  const publicPath = process.env.NODE_ENV === 'development' ? 'http://localhost:9000/' : 'ENVIRONMENT_PUBLIC_URL';
   return merge(defaultConfig, {
     // modify the webpack config however you'd like to by adding to this object
     output: {
-      publicPath: 'ENVIRONMENT_PUBLIC_URL', //This will be replace in the server.js
-      // path: path.resolve(__dirname, distName),
+      publicPath: publicPath, //This will be replace in the serve.js
     },
     plugins: [
       new ModuleFederationPlugin({

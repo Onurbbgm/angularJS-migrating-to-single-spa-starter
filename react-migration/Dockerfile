@@ -9,10 +9,10 @@ COPY . .
 
 RUN npm run build
 
-COPY /mx6-react/dist ./dist
+COPY ./dist ./dist
 
-RUN npm install -g serve
+COPY ./serve.js ./
 
 EXPOSE 9000
 
-CMD npm run serve
+CMD node serve.js env=$REACT_ENV

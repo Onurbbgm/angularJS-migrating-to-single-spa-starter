@@ -12,10 +12,24 @@ const prepareDist = () => {
     return fileServer;
 };
 
+let env = "qa";
+
+process.argv.forEach(function (val, index, array) {
+    if (val.indexOf('=') > 0) {
+        const param = val.split('=');
+        try {
+            if (param[0].toLowerCase() === 'env') {
+                env = param[1].toLowerCase();
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    }
+});
 
 const getEnviromentSetup = () => {
-    switch (process.env.NODE_ENV) {
-        case 'LOCAL_DEV': {
+    switch (env) {
+        case 'dev': {
             return 'http://localhost:9000/';
         }
         case 'qa': {
@@ -42,6 +56,12 @@ const setEnvironmentUrl = (publicPath) => {
     // The string you want to replace
     const findString = 'ENVIRONMENT_PUBLIC_URL';
 
+    const searchForIn = [
+        'dist/remoteEntry.js',
+        'dist/Bruno-react-migration.js.map',
+        'dist/remoteEntry.js.map',
+        'dist/Bruno-react-migration.js'
+    ];
 
     // Read all files in the directory
     fs.readdir(directoryPath, (err, files) => {
@@ -53,26 +73,28 @@ const setEnvironmentUrl = (publicPath) => {
         files.forEach((file) => {
             const filePath = path.join(directoryPath, file);
 
-            // Read the file
-            fs.readFile(filePath, 'utf8', (err, data) => {
-                if (err) {
-                    return console.error('Unable to read file: ' + err);
-                }
-
-                if (data.includes(findString)) {
-                    console.log('found in: ', filePath);
-                }
-
-                // Replace the string
-                const result = data.replace(new RegExp(findString, 'g'), publicPath);
-
-                // Write the file back out
-                fs.writeFile(filePath, result, 'utf8', (err) => {
+            if (searchForIn.includes(filePath)) {
+                // Read the file
+                fs.readFile(filePath, 'utf8', (err, data) => {
                     if (err) {
-                        return console.error('Unable to write file: ' + err);
+                        return console.error('Unable to read file: ' + err);
                     }
+
+                    if (data.includes(findString)) {
+                        console.log('found in: ', filePath);
+                    }
+
+                    // Replace the string
+                    const result = data.replace(new RegExp(findString, 'g'), publicPath);
+
+                    // Write the file back out
+                    fs.writeFile(filePath, result, 'utf8', (err) => {
+                        if (err) {
+                            return console.error('Unable to write file: ' + err);
+                        }
+                    });
                 });
-            });
+            }
         });
     })
 }

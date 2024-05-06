@@ -3,7 +3,7 @@
   "scripts": {
     "start": "NODE_ENV=development webpack serve --port 9000",
     "start:standalone": "webpack serve --env standalone",
-    "serve": "NODE_ENV=qa node serve.js",
+    "serve": "node serve.js env=dev",
     "build": "concurrently npm:build:*",
     "build:webpack": "webpack --mode=production",
     "analyze": "webpack --mode=production --env analyze",
