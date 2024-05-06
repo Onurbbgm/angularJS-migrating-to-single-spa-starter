@@ -9,10 +9,6 @@ COPY . .
 
 RUN npm run build
 
-COPY ./dist ./dist
-
-COPY ./serve.js ./
-
 EXPOSE 9000
 
 CMD node serve.js env=$REACT_ENV
